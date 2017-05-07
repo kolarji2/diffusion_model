@@ -1,7 +1,7 @@
 {
 	"model": {
-	"foam-file": "simle.txt",		"__comment": "file with foam structure",
-	"output-file": "res_exp.txt", 	"__comment": "file where results will be saved",
+	"foam-files": ["results/res_foam/exp_sp_3.txt","results/res_foam/exp_sp_4.txt","results/res_foam/exp_sp_5.txt","results/res_foam/exp_sp_6.txt"],		"__comment": "files with foam structure",
+	"output-file": "results_sp_diff_exp.txt", 	"__comment": "file where results will be saved",
 	"mainaxis": 1,					"__comment": "index of main axis to be considered as i axis 1=i 2=j, 3=k",
 	"c0": 1,						"__comment": "fixed concentration of gas i=0",
 	"c1": 2,						"__comment": "fixed concentration of gas i=imax",
