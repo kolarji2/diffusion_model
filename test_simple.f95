@@ -55,7 +55,7 @@ program test_simple
 	!dwall_arr=[1,2,3,4,5]
 	!dspace_arr=[5,10,20,50,95]
 	dwall_arr=[1,2,4,8,16]
-	dspace_arr=[5,10,20,50,100]
+	dspace_arr=[5,10,20,40,80]
 	
 	open(newunit=outstream,file=model%output_file, status="replace")
 	dowall=.true.

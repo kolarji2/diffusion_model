@@ -16,7 +16,7 @@ module types
 			real(dp) :: Henry_const ! Equilibrium constant		
 		end type
 		type model_data
-			character(len=charlen) :: foam_file
+			character(len=charlen), allocatable :: foam_files(:)
 			character(len=charlen) :: output_file
 			integer :: mainaxis !index of axis, which parallel to diff grad
 			real(dp) :: c0 ! concentration i=1

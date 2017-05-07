@@ -21,16 +21,17 @@ subroutine load_from_json(file_name,model,agmg_conf,physical_properties)
 	type(json_file) :: json
 	type(json_value), pointer :: prop_pointer
 	logical :: found
-	integer :: propid,maxpropid
+	integer :: propid,maxpropid,i
+	integer, allocatable :: ilen_foam_files(:)
 	character(len=charlen) :: propertyid,propertyidpath
-	character(len=:), allocatable :: foam_file,nameid,output_file
+	character(len=:), allocatable :: foam_files(:),nameid,output_file
 	! initialize the class
     call json%initialize()
     !load file
 	call json%load_file(filename =file_name)
 	!load module info
-	call json%get('model.foam-file', foam_file, found)
-		if ( .not. found ) call error("model foam-file not found in json file")
+	call json%get('model.foam-files', foam_files, ilen_foam_files,found)
+		if ( .not. found ) call error("model foam-files not found in json file")
 	call json%get('model.output-file', output_file, found)
 		if ( .not. found ) call error("model output-file not found in json file")
 	call json%get('model.mainaxis', model%mainaxis, found)
@@ -43,7 +44,11 @@ subroutine load_from_json(file_name,model,agmg_conf,physical_properties)
         if ( .not. found ) call error("model h not found in json file")
     call json%get('model.p', model%p, found)
         if ( .not. found ) call error("model p not found in json file")    
-    model%foam_file=foam_file
+    allocate(model%foam_files(size(foam_files)))
+    do i=1,size(foam_files)
+		write(*,*) foam_files(i)
+		model%foam_files(i)=foam_files(i)
+    end do    
 	model%output_file=output_file
     
     !load configuration for AGMG solver
