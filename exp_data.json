@@ -1,0 +1,45 @@
+{
+	"model": {
+	"foam-file": "simle.txt",		"__comment": "file with foam structure",
+	"output-file": "res_exp.txt", 	"__comment": "file where results will be saved",
+	"mainaxis": 1,					"__comment": "index of main axis to be considered as i axis 1=i 2=j, 3=k",
+	"c0": 1,						"__comment": "fixed concentration of gas i=0",
+	"c1": 2,						"__comment": "fixed concentration of gas i=imax",
+	"h": 1e-8,						"__comment": "size of voxel",
+	"p": 1e5,						"__comment": "pressure [Pa]",
+	"T": 300,						"__comment": "temperature [K]"
+	},
+	"agmg-solver": {		
+		"ijob": 212, 	"__comment": "0 full solve, 10 linear first guess is used",
+		"iprint": -1, 	"__comment": "6 standard output",
+		"nrest": 0, 	"__comment": "0 normal solver, 1 flexible CG(only symmetric positive definite matrices)",
+		"iter": 100, 	"__comment": "maximal number of iterations",
+		"tol": 1e-12, 	"__comment": "tolerance on relative residual norm"
+		},
+	"physical-properties": [
+		{
+		"nameid": "co2", "__comment": "name of gas",
+		"dgas": 1.68e-5, "__comment": "diffusion coefficient in gas phase",
+		"dpol": 1e-12, "__comment": "diffusion coefficient in polymer phase",
+		"H": 0.32074, "__comment": "Henry constant describing equilibrium c_gas=Hc_pol",
+		},
+		{
+		"nameid": "o2",
+		"dgas": 2.1e-5,
+		"dpol": 4e-13,
+		"H": 3.8878
+		},
+		{
+		"nameid": "n2",
+		"dgas": 1.43e-5,
+		"dpol": 2e-13,
+		"H": 5.10274
+		},
+		{
+		"nameid": "cyp",
+		"dgas": 1e-6,
+		"dpol": 1e-13,
+		"H": 0.0255
+		}
+	]		
+}
