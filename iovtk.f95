@@ -69,10 +69,11 @@ subroutine write_vtk_txt(file_name,vtk_data,data_dim)
 	close(fid)
 end subroutine
 
-subroutine write_solution_to_file(file_name,conc,data_dim)
+subroutine write_solution_to_file(file_name,conc,data_dim,c0,c1)
 	CHARACTER(len=*), intent(in) :: file_name
 	real(dp), allocatable, intent(in) :: conc(:)
 	integer, intent(in) :: data_dim
+	real(dp), intent(in) :: c0,c1
 	integer :: fid
 	integer :: i,l
 	integer :: voxel_val
@@ -90,15 +91,21 @@ subroutine write_solution_to_file(file_name,conc,data_dim)
 	i=0
 	do l=1,(data_dim**3-1),2
 		if (l==1 .and. modulo(data_dim**3,2)/=0) then
-			write(fid,"(F10.8A1F10.8A1F10.8)") conc(l)," ",conc(l+1)," ",conc(l+2)
+			write(fid,"(F10.8A1F10.8A1F10.8)") gc(conc(l),c0,c1)," ", &
+						gc(conc(l+1),c0,c1)," ",gc(conc(l+2),c0,c1)
 			i=1
 		else
-			write(fid,"(F10.8A1F10.8)") conc(l+i)," ",conc(l+i+1)
+			write(fid,"(F10.8A1F10.8)") gc(conc(l+1),c0,c1)," ", gc(conc(l+i+1),c0,c1)
 		end if
 	end do
 	
 	close(fid)
 end subroutine
+
+real(dp) function gc(conc,c0,c1) result(res)
+		real(dp), intent(in) ::  conc,c0,c1
+		res=(conc-c0)/c1
+	end function
 
 subroutine rotate_box(vtk_data,data_dim,ind)
 	integer, allocatable, intent(inout) :: vtk_data(:,:,:)

@@ -71,7 +71,7 @@ program main
 				call dagmg(N,a,ja,ia,b,x,1,iprint,nrest,iter,tol)
 			end if
 			call dagmg(N,a,ja,ia,b,x,ijob,iprint,nrest,iter,tol)
-			!call write_solution_to_file("conc_file.vtk",x,data_dim)
+			call write_solution_to_file("conc_file.vtk",x,data_dim,c0,c1)
 			!	process results
 			!	compute effective difffusivity
 			call compute_effective_diffusivity(x,vtk_data,data_dim,model,physical_properties(i),deff,vrcdeff)
