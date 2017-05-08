@@ -106,11 +106,8 @@ subroutine write_vtkdata_to_vtk(file_name,vtk_data,data_dim)
 	CHARACTER(len=*), intent(in) :: file_name
 	integer, allocatable, intent(in) :: vtk_data(:,:,:)
 	integer, intent(in) :: data_dim
-	integer :: fid
 	integer :: i,j,k,l
-	integer :: voxel_val
 	real(dp), allocatable :: conc(:)
-	open(newunit=fid, file=file_name, status="replace")
 	allocate(conc(data_dim**3))
 	do i=1,data_dim
 		do j=1,data_dim
