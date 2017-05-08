@@ -13,7 +13,7 @@ program main
 	use error_handler, only: error
 	use common_func, only: wrap_ind,ijk_to_l
 	use structure_generator, only: gen_walls, gen_cubic
-	use iovtk, only: load_vtk_txt, write_vtk_txt, rotate_box, write_solution_to_file
+	use iovtk, only: load_vtk_txt, write_vtk_txt, rotate_box, write_solution_to_file, write_vtkdata_to_vtk
 	use load_configuration, only: load_from_json
 	use fvm_iem_matrix, only: generate_matrix
 	use process_results, only: compute_effective_diffusivity
@@ -72,6 +72,7 @@ program main
 			end if
 			call dagmg(N,a,ja,ia,b,x,ijob,iprint,nrest,iter,tol)
 			call write_solution_to_file("conc_file.vtk",x,data_dim,c0,c1)
+			call write_vtkdata_to_vtk("struc_file.vtk",vtk_data,data_dim)
 			!	process results
 			!	compute effective difffusivity
 			call compute_effective_diffusivity(x,vtk_data,data_dim,model,physical_properties(i),deff,vrcdeff)

@@ -9,7 +9,7 @@ use types, only: dp
 use common_func, only: wrap_ind,ijk_to_l
 implicit none
 private
-public load_vtk_txt, write_vtk_txt,rotate_box,write_solution_to_file
+public load_vtk_txt, write_vtk_txt,write_vtkdata_to_vtk,rotate_box,write_solution_to_file
 contains
 
 subroutine load_vtk_txt(file_name,vtk_data,data_dim)
@@ -102,9 +102,31 @@ subroutine write_solution_to_file(file_name,conc,data_dim,c0,c1)
 	close(fid)
 end subroutine
 
+subroutine write_vtkdata_to_vtk(file_name,vtk_data,data_dim)
+	CHARACTER(len=*), intent(in) :: file_name
+	integer, allocatable, intent(in) :: vtk_data(:,:,:)
+	integer, intent(in) :: data_dim
+	integer :: fid
+	integer :: i,j,k,l
+	integer :: voxel_val
+	real(dp), allocatable :: conc(:)
+	open(newunit=fid, file=file_name, status="replace")
+	allocate(conc(data_dim**3))
+	do i=1,data_dim
+		do j=1,data_dim
+			do k=1,data_dim
+				l=ijk_to_l(i,j,k,data_dim)
+				conc(l)=1.0*vtk_data(k,j,i)
+			end do
+		end do
+	end do	
+	call write_solution_to_file(file_name,conc,data_dim,0.0_dp,1.0_dp)
+end subroutine
+
+
 real(dp) function gc(conc,c0,c1) result(res)
 		real(dp), intent(in) ::  conc,c0,c1
-		res=(conc-c0)/c1
+		res=(conc-c0)/(c1-c0)
 	end function
 
 subroutine rotate_box(vtk_data,data_dim,ind)
