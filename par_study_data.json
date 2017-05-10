@@ -1,6 +1,6 @@
 {
 	"model": {
-	"foam-files": ["results/foam/walls8-2.txt","results/diff_foam/diff_sp01_.txt","results/diff_foam/diff_sp02_.txt","results/diff_foam/diff_sp03_.txt","results/diff_foam/diff_sp04_.txt","results/diff_foam/diff_sp05_.txt"],		"__comment": "files with foam structure",
+	"foam-files": ["results/foam/walls8-2.txt","results/diff_foam/diff_sp01_.txt","results/diff_foam/diff_sp02_.txt","results/diff_foam/diff_sp03_.txt","results/diff_foam/diff_sp04_.txt","results/diff_foam/diff_sp05_.txt","results/diff_foam/exp_lowstrut.txt"],		"__comment": "files with foam structure",
 	"output-file": "results/res_diff_par_study_model.txt", 	"__comment": "file where results will be saved",
 	"mainaxis": 1,					"__comment": "index of main axis to be considered as i axis 1=i 2=j, 3=k",
 	"c0": 1,						"__comment": "fixed concentration of gas i=0",
